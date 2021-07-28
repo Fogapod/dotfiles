@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# polybar forgets fonts
+fc-cache -f &
+
+xwallpaper --zoom ~/.local/share/wallpapers/venture2.png
+xrdb ~/.config/X11/Xresources & # maybe unneded now
+xcompmgr &                      # transparency
+dunst &                         # notifications
