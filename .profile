@@ -24,6 +24,10 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export ZDOTDIR="$HOME/.config/zsh"
 export HISTFILE="$XDG_DATA_HOME"/zsh/history
 
+# redis
+export REDISCLI_HISTFILE="$XDG_DATA_HOME"/redis/rediscli_history
+export REDISCLI_RCFILE="$XDG_CONFIG_HOME"/redis/redisclirc
+
 # self explanetory
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export LESSHISTFILE="-"
@@ -38,6 +42,7 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export K9SCONFIG="$XDG_CONFIG_HOME"/k9s
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export GOPATH="$XDG_DATA_HOME"/go
+export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 
 # unstable
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode

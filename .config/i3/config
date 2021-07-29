@@ -1,6 +1,10 @@
 # i3 config file (v4)
 # DO NOT REMOVE THIS LINE OR YOU DIE
 
+# VPN
+# nmcli con up pink
+# nmcli con down pink
+
 # colors (fat yellow borders)
 # class                 border  backgr. text    indicator child_border
 client.focused          #4c7899 #285577 #ffffff #2e9ef4   #fba922
