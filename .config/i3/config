@@ -1,3 +1,6 @@
+# i3 config file (v4)
+# DO NOT REMOVE THIS LINE OR YOU DIE
+
 # colors (fat yellow borders)
 # class                 border  backgr. text    indicator child_border
 client.focused          #4c7899 #285577 #ffffff #2e9ef4   #fba922
@@ -128,7 +131,6 @@ bindsym $mod + Shift + e exec "i3-nagbar -t warning -m 'You pressed the exit sho
 
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-
         bindsym j resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt
