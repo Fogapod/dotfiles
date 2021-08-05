@@ -3,7 +3,7 @@ export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
 
 # default apps
 export EDITOR="nvim"
-export TERMINAL="alacrity"
+export TERMINAL="alacritty"
 export BROWSER="brave"
 export FILE="ranger"
 export STATUSBAR="polybar"
