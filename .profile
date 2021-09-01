@@ -43,6 +43,7 @@ export K9SCONFIG="$XDG_CONFIG_HOME"/k9s
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export GOPATH="$XDG_DATA_HOME"/go
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
+export ELECTRUMDIR="$XDG_DATA_HOME/electrum"
 
 # unstable
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
