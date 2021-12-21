@@ -44,9 +44,9 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export GOPATH="$XDG_DATA_HOME"/go
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 export ELECTRUMDIR="$XDG_DATA_HOME/electrum"
+export SSB_HOME="$XDG_DATA_HOME"/zoom
 
 # unstable
-export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc"
 export PSQL_HISTORY="$XDG_CACHE_HOME/pg/psql_history"
 export PGPASSFILE="$XDG_CONFIG_HOME/pg/pgpass"
