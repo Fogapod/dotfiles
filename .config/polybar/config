@@ -287,7 +287,9 @@ ramp-free-7 = █
 
 [module/network]
 type = internal/network
-interface = enp5s0
+;interface = enp5s0
+;interface = wlp11s0f3u2
+interface = wlp2s0f0u1u4
 interval = 3.0
 
 format-connected-prefix = " "
@@ -304,7 +306,7 @@ label-disconnected = %ifname% disconnected
 type = internal/date
 interval = 5
 
-date =
+date = %a
 date-alt = %d-%m-%Y
 
 time = %H:%M
