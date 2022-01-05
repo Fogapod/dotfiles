@@ -5,4 +5,4 @@ $XDG_CONFIG_HOME/X11/xprofile
 # gpg nonsense
 /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
 
-exec i3
+ssh-agent i3
