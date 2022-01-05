@@ -1,9 +1,17 @@
+#include "/home/eugene/chk/base16/xresources/xresources/base16-gruvbox-dark-hard-256.Xresources"
+
 *.font: Monospace-11;
+*faceName: Public Sans
+xterm*faceSize: 14
+*multiClickTime: 300
+*international: true
+Xcursor.theme: default
+Xcursor.size:  32
 
 !! Set the background, foreground and cursor colors as below:
-*.background: #282828
-*.foreground: white
-*.cursorColor: white
+!!*.background: #282828
+!!*.foreground: white
+!!*.cursorColor: white
 
 /* name		dark	light */
 /* black	0	8 */
@@ -16,24 +24,24 @@
 /* white	7	15 */
 
 /* !! gruvbox: */
-*.color0: #1d2021
-*.color1: #cc241d
-*.color2: #98971a
-*.color3: #d79921
-*.color4: #458588
-*.color5: #b16286
-*.color6: #689d6a
-*.color7: #a89984
-*.color8: #928374
-*.color9: #fb4934
-*.color10: #b8bb26
-*.color11: #fabd2f
-*.color12: #83a598
-*.color13: #d3869b
-*.color14: #8ec07c
-*.color15: #ebdbb2
-*.color256: #1d2021
-*.color257: #ebdbb2
+!!*.color0: #1d2021
+!!*.color1: #cc241d
+!!*.color2: #98971a
+!!*.color3: #d79921
+!!*.color4: #458588
+!!*.color5: #b16286
+!!*.color6: #689d6a
+!!*.color7: #a89984
+!!*.color8: #928374
+!!*.color9: #fb4934
+!!*.color10: #b8bb26
+!!*.color11: #fabd2f
+!!*.color12: #83a598
+!!*.color13: #d3869b
+!!*.color14: #8ec07c
+!!*.color15: #ebdbb2
+!!*.color256: #1d2021
+!!*.color257: #ebdbb2
 
 /* !! gruvbox light: */
 /* *.color0: #fbf1c7 */

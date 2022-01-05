@@ -1,9 +1,0 @@
-#!/bin/sh
-
-alias da=doas
-alias vi=nvim
-
-# dotfiles management
-alias gdot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-# to remove repo files:
-# rm LICENSE && gdot update-index --assume-unchanged LICENSE

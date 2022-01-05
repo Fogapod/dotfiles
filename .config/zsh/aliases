@@ -1,0 +1,19 @@
+#!/bin/sh
+
+alias da=doas
+alias e=nvim
+alias g=git
+alias o=xdg-open
+
+alias l=exa
+alias ls=exa
+alias ll='exa -l'
+alias la='exa -la'
+
+alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
+alias nvimrc='nvim ~/.config/nvim/'
+
+# dotfiles management
+alias gdot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+# to remove repo files:
+# rm LICENSE && gdot update-index --assume-unchanged LICENSE

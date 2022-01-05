@@ -1,1 +1,1 @@
-.profile
+/home/eugene/.config/zsh/profile

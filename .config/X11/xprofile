@@ -4,6 +4,6 @@
 fc-cache -f &
 
 xwallpaper --zoom ~/.local/share/wallpapers/venture2.png
-xrdb ~/.config/X11/Xresources & # maybe unneded now
+xrdb ~/.config/X11/Xresources &
 xcompmgr &                      # transparency
 dunst &                         # notifications

@@ -10,8 +10,8 @@
 client.focused          #fba922 #fba922 #ffffff #fba922   #fba922
 
 # i3-gaps
-for_window [class=".*"] border pixel 2
-gaps inner 8
+for_window [class=".*"] border pixel 1
+gaps inner 0
 gaps outer 0
 
 smart_borders on

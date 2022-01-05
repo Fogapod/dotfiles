@@ -1,59 +1,79 @@
-# Path to your oh-my-zsh installation.
-export ZSH="$XDG_DATA_HOME/oh-my-zsh"
+#!/bin/sh
 
-# https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="gentoo"
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-plugins=(git common-aliases docker python pip ssh-agent kubectl cargo)
-
-source $ZSH/oh-my-zsh.sh
-
-source $XDG_CONFIG_HOME/aliasrc
+# sourced from:
+# - https://github.com/jonhoo/configs
+# - https://github.com/ChristianChiarulli/Machfiles
+# - https://github.com/xdavidel/voidrice/tree/c5b99fe108a3d9d2041c656c5eb985264946bd47
 
 # completion after pacman
 zstyle ':completion:*' rehash true
 
-# Easier copying of large files or directorys with rsync
-function cpr() {
-    rsync --archive -hh --partial --info=stats1 --info=progress2 --modify-window=1 "$@"
-}
+# Base16 Shell
+BASE16_SHELL="$HOME/chk/base16/shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
 
-# Easier moving of large files or directorys with rsync
-function mvr() {
-    rsync --archive -hh --partial --info=stats1 --info=progress2 --modify-window=1 --remove-source-files "$@"
-}
+setopt appendhistory
+
+# some useful options (man zshoptions)
+setopt autocd extendedglob nomatch menucomplete
+setopt interactive_comments
+stty stop undef		# Disable ctrl-s to freeze terminal.
+zle_highlight=('paste:none')
+
+# beeping is annoying
+unsetopt BEEP
+
+# completions
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+# zstyle ':completion::complete:lsof:*' menu yes select
+zmodload zsh/complist
+# compinit
+_comp_options+=(globdots)		# Include hidden files.
+
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+source "$ZDOTDIR/aliases"
+source "$ZDOTDIR/functions"
+source "$ZDOTDIR/vim-mode"
+source "$ZDOTDIR/prompt"
+source "$ZDOTDIR/exports"
+
+# Colors
+autoload -Uz colors && colors
+
+# Plugins
+zsh_add_plugin "zsh-users/zsh-autosuggestions"
+zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
+zsh_add_plugin "hlissner/zsh-autopair"
+# For more plugins: https://github.com/unixorn/awesome-zsh-plugins
+# More completions https://github.com/zsh-users/zsh-completions
+
+# Key-bindings
+bindkey -s '^o' 'ranger^M'
+bindkey '^[[P' delete-char
+bindkey "^p" up-line-or-beginning-search
+bindkey "^n" down-line-or-beginning-search
+bindkey "^k" up-line-or-beginning-search
+bindkey "^j" down-line-or-beginning-search
+bindkey -r "^u"
+bindkey -r "^d"
+
+# FZF 
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
+[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f $ZDOTDIR/completion/_fnm ] && fpath+="$ZDOTDIR/completion/"
+# export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
+compinit
+
+# Edit line in vim with ctrl-e:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
