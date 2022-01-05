@@ -42,7 +42,7 @@ source "$ZDOTDIR/aliases"
 source "$ZDOTDIR/functions"
 source "$ZDOTDIR/vim-mode"
 source "$ZDOTDIR/prompt"
-source "$ZDOTDIR/exports"
+# source "$ZDOTDIR/exports"
 
 # Colors
 autoload -Uz colors && colors
@@ -64,7 +64,7 @@ bindkey "^j" down-line-or-beginning-search
 bindkey -r "^u"
 bindkey -r "^d"
 
-# FZF 
+# FZF
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh

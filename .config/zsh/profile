@@ -1,3 +1,5 @@
+!/bin/zsh
+
 # XDG export XDG_DESKTOP_DIR="$HOME/"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -12,6 +14,14 @@ export TERMINAL="alacritty"
 export BROWSER="brave"
 export FILE="ranger"
 export STATUSBAR="polybar"
+
+# some of these are used in paths
+source $ZDOTDIR/exports
+
+# path
+export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
+export PATH="$PATH:$CARGO_HOME"/bin
+export PATH="$PATH:$GOPATH"/bin
 
 # start X
 # uncomment for sway
