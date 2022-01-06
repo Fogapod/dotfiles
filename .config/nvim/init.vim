@@ -7,9 +7,10 @@
 set nocompatible
 filetype off
 set rtp+=~/chk/base16/vim/
-call plug#begin()
 
 " Load plugins
+call plug#begin()
+
 " VIM enhancements
 Plug 'ciaranm/securemodelines'
 Plug 'editorconfig/editorconfig-vim'
@@ -28,18 +29,21 @@ Plug 'junegunn/fzf.vim'
 " Semantic language support
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
-Plug 'hrsh7th/cmp-nvim-lsp', {'branch': 'main'}
-Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}
-Plug 'hrsh7th/cmp-path', {'branch': 'main'}
-Plug 'hrsh7th/nvim-cmp', {'branch': 'main'}
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 Plug 'ray-x/lsp_signature.nvim'
 
 " Python
-Plug 'davidhalter/jedi-vim'
-Plug 'averms/black-nvim'
+"Plug 'davidhalter/jedi-vim'
+" will not update: https://github.com/psf/black/issues/2503#issuecomment-981902285
+"Plug 'psf/black', { 'tag': 'stable' }
+"Plug 'brentyi/isort.vim'
 
 " Only because nvim-cmp _requires_ snippets
-Plug 'hrsh7th/cmp-vsnip', {'branch': 'main'}
+Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
 " Syntactic language support
@@ -51,14 +55,14 @@ Plug 'rhysd/vim-clang-format'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
+" Appearence
 Plug 'chriskempson/base16-vim'
+
 call plug#end()
 
-if has('nvim')
-    set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
-    set inccommand=nosplit
-    noremap <C-q> :confirm qall<CR>
-end
+set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+set inccommand=nosplit
+noremap <C-q> :confirm qall<CR>
 
 " deal with colors
 if !has('gui_running')
@@ -112,10 +116,11 @@ cmp.setup({
   },
 })
 
--- Enable completing paths in :
+-- Completions in :
 cmp.setup.cmdline(':', {
   sources = cmp.config.sources({
-    { name = 'path' }
+    { name = 'path' },
+    { name = 'cmdline' }
   })
 })
 
@@ -156,6 +161,7 @@ local on_attach = function(client, bufnr)
 end
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 lspconfig.rust_analyzer.setup {
   on_attach = on_attach,
   flags = {
@@ -176,6 +182,19 @@ lspconfig.rust_analyzer.setup {
   capabilities = capabilities,
 }
 
+lspconfig.pylsp.setup {
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  filetypes = {"python"},
+  settings = {
+    pylsp = {
+      configurationSources = {"flake8"},
+      }
+  }
+}
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = true,
@@ -186,7 +205,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 END
 
 " Enable type inlay hints
-autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }
+au CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }
 
 " Plugin settings
 let g:secure_modelines_allowed_items = [
@@ -215,16 +234,14 @@ let g:lightline = {
       \   'filename': 'LightlineFilename'
       \ },
       \ }
+
 function! LightlineFilename()
   return expand('%:t') !=# '' ? @% : '[No Name]'
-endfunction
+endfun
 
 " from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 let mapleader = "\<Space>"
 
-if executable('ag')
-	set grepprg=ag\ --nogroup\ --nocolor
-endif
 if executable('rg')
 	set grepprg=rg\ --no-heading\ --vimgrep
 	set grepformat=%f:%l:%c:%m
@@ -239,9 +256,6 @@ nmap <leader>; :Buffers<CR>
 
 " Quick-save
 nmap <leader>w :w<CR>
-
-" Don't confirm .lvimrc
-let g:localvimrc_ask = 0
 
 " rust
 let g:rustfmt_autosave = 1
@@ -264,14 +278,11 @@ set updatetime=300
 " # Editor settings
 " =============================================================================
 filetype plugin indent on
-set autoindent
 set timeoutlen=300 " http://stackoverflow.com/questions/2158516/delay-before-o-opens-a-new-line
 set encoding=utf-8
 set scrolloff=2
 set noshowmode
-set hidden
 set nowrap
-set nojoinspaces
 let g:sneak#s_next = 1
 let g:vim_markdown_new_list_item_indent = 0
 let g:vim_markdown_auto_insert_bullets = 0
@@ -279,12 +290,9 @@ let g:vim_markdown_frontmatter = 1
 set printfont=:h10
 set printencoding=utf-8
 set printoptions=paper:letter
+
 " Always draw sign column. Prevent buffer moving when adding/deleting sign.
 set signcolumn=yes
-
-" Settings needed for .lvimrc
-set exrc
-set secure
 
 " Sane splits
 set splitright
@@ -295,8 +303,9 @@ set undofile
 
 " Decent wildmenu
 set wildmenu
-set wildmode=list:longest
-set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
+set wildignorecase
+"set wildmode=list:longest
+"set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
 
 " Use wide tabs
 set shiftwidth=8
@@ -332,14 +341,11 @@ cnoremap %s/ %sm/
 " =============================================================================
 " # GUI settings
 " =============================================================================
-set guioptions-=T " Remove toolbar
 set vb t_vb= " No more beeps
 set backspace=2 " Backspace over newlines
 set nofoldenable
-set ttyfast
-" https://github.com/vim/vim/issues/1735#issuecomment-383353563
 set lazyredraw
-set synmaxcol=500
+set synmaxcol=1000
 set laststatus=2
 set relativenumber " Relative line numbers
 set number " Also show current absolute line
@@ -460,17 +466,16 @@ noremap <leader>m ct_
 map <F1> <Esc>
 imap <F1> <Esc>
 
-
 " =============================================================================
 " # Autocommands
 " =============================================================================
 
 " Prevent accidental writes to buffers that shouldn't be edited
-autocmd BufRead *.orig set readonly
-autocmd BufRead *.pacnew set readonly
+au BufRead *.orig set readonly
+au BufRead *.pacnew set readonly
 
 " Leave paste mode when leaving insert mode
-autocmd InsertLeave * set nopaste
+au InsertLeave * set nopaste
 
 " Jump to last edit position on opening file
 if has("autocmd")
@@ -478,19 +483,15 @@ if has("autocmd")
   au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" Follow Rust code style rules
-au Filetype rust source ~/.config/nvim/scripts/spacetab.vim
-au Filetype rust set colorcolumn=100
-
 " Help filetype detection
-autocmd BufRead *.plot set filetype=gnuplot
-autocmd BufRead *.md set filetype=markdown
-autocmd BufRead *.lds set filetype=ld
-autocmd BufRead *.tex set filetype=tex
-autocmd BufRead *.trm set filetype=c
+au BufRead *.plot set filetype=gnuplot
+au BufRead *.md set filetype=markdown
+au BufRead *.lds set filetype=ld
+au BufRead *.tex set filetype=tex
+au BufRead *.trm set filetype=c
 
 " Script plugins
-autocmd Filetype html,xml,xsl,php source ~/.config/nvim/scripts/closetag.vim
+au Filetype html,xml,xsl,php source ~/.config/nvim/scripts/closetag.vim
 
 function! <SID>StripTrailingWhitespaces()
   if !&binary && &filetype != 'diff'
@@ -501,11 +502,5 @@ function! <SID>StripTrailingWhitespaces()
 endfun
 
 " Trim spaces at the end: https://stackoverflow.com/a/1618401
-autocmd BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
+au BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
   \ :call <SID>StripTrailingWhitespaces()
-
-" =============================================================================
-" # Footer
-" =============================================================================
-
-runtime! plugin/python_setup.vim
