@@ -191,7 +191,12 @@ lspconfig.pylsp.setup {
   settings = {
     pylsp = {
       configurationSources = {"flake8"},
+      plugins = {
+	flake8 = {
+	  enabled = true
+	}
       }
+    }
   }
 }
 
@@ -504,3 +509,5 @@ endfun
 " Trim spaces at the end: https://stackoverflow.com/a/1618401
 au BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
   \ :call <SID>StripTrailingWhitespaces()
+
+au BufWritePre *.py :lua vim.lsp.buf.formatting()
