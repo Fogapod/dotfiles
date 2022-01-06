@@ -355,10 +355,10 @@ background_opacity: 0.95
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 
-shell:
-    program: /usr/bin/tmux
-    args:
-     - -u # force UTF-8 in tmux
+#shell:
+#    program: /usr/bin/tmux
+#    args:
+#     - -u # force UTF-8 in tmux
 
 # Startup directory
 #
