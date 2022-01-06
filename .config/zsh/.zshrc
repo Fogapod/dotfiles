@@ -3,7 +3,7 @@
 # sourced from:
 # - https://github.com/jonhoo/configs
 # - https://github.com/ChristianChiarulli/Machfiles
-# - https://github.com/xdavidel/voidrice/tree/c5b99fe108a3d9d2041c656c5eb985264946bd47
+# - https://github.com/LukeSmithxyz/voidrice
 
 # completion after pacman
 zstyle ':completion:*' rehash true
@@ -42,7 +42,16 @@ autoload -Uz compinit
 zstyle ':completion:*' menu select
 # zstyle ':completion::complete:lsof:*' menu yes select
 zmodload zsh/complist
+compinit
 _comp_options+=(globdots)		# Include hidden files.
+
+# source before hotkeys, otherwise up/down history search breaks because of vim
+# mode somehow
+source "$ZDOTDIR/vim-mode"
+source "$ZDOTDIR/aliases"
+source "$ZDOTDIR/functions"
+source "$ZDOTDIR/prompt"
+# source "$ZDOTDIR/exports"
 
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
@@ -102,12 +111,6 @@ bindkey -M vicmd '^[[1;5C' forward-word
 bindkey -M viins '^[[1;5D' backward-word
 bindkey -M vicmd '^[[1;5D' backward-word
 
-source "$ZDOTDIR/aliases"
-source "$ZDOTDIR/functions"
-source "$ZDOTDIR/vim-mode"
-source "$ZDOTDIR/prompt"
-# source "$ZDOTDIR/exports"
-
 # Colors
 autoload -Uz colors && colors
 
@@ -135,7 +138,6 @@ bindkey -r "^d"
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f $ZDOTDIR/completion ] && fpath+="$ZDOTDIR/completion/"
 # export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
-compinit
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
