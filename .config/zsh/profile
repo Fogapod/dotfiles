@@ -1,4 +1,4 @@
-!/bin/zsh
+#!/bin/zsh
 
 # XDG export XDG_DESKTOP_DIR="$HOME/"
 export XDG_CONFIG_HOME="$HOME/.config"
