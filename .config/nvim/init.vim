@@ -36,12 +36,6 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'ray-x/lsp_signature.nvim'
 
-" Python
-"Plug 'davidhalter/jedi-vim'
-" will not update: https://github.com/psf/black/issues/2503#issuecomment-981902285
-"Plug 'psf/black', { 'tag': 'stable' }
-"Plug 'brentyi/isort.vim'
-
 " Only because nvim-cmp _requires_ snippets
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
@@ -197,7 +191,8 @@ lspconfig.pylsp.setup {
 	}
       }
     }
-  }
+  },
+  capabilities = capabilities,
 }
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -213,19 +208,6 @@ END
 au CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }
 
 " Plugin settings
-let g:secure_modelines_allowed_items = [
-                \ "textwidth",   "tw",
-                \ "softtabstop", "sts",
-                \ "tabstop",     "ts",
-                \ "shiftwidth",  "sw",
-                \ "expandtab",   "et",   "noexpandtab", "noet",
-                \ "filetype",    "ft",
-                \ "foldmethod",  "fdm",
-                \ "readonly",    "ro",   "noreadonly", "noro",
-                \ "rightleft",   "rl",   "norightleft", "norl",
-                \ "colorcolumn"
-                \ ]
-
 " Lightline
 let g:lightline = {
       \ 'active': {
@@ -245,15 +227,9 @@ function! LightlineFilename()
 endfun
 
 " from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
-let mapleader = "\<Space>"
-
-if executable('rg')
-	set grepprg=rg\ --no-heading\ --vimgrep
-	set grepformat=%f:%l:%c:%m
-endif
-
-" Javascript
-let javaScript_fold=0
+map <space> <leader>
+" https://www.reddit.com/r/vim/comments/1vdrxg/space_is_a_big_key_what_do_you_map_it_to/cerq68d/
+map <space><space> <leader><leader>
 
 " Open hotkeys
 map <C-p> :Files<CR>
@@ -309,14 +285,13 @@ set undofile
 " Decent wildmenu
 set wildmenu
 set wildignorecase
-"set wildmode=list:longest
-"set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
+set wildmode=list:longest
+set wildignore=*~,*.png,*.jpg,*.gif,*.o
 
-" Use wide tabs
-set shiftwidth=8
-set softtabstop=8
-set tabstop=8
-set noexpandtab
+" Tab settings
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
 
 " Wrapping options
 set formatoptions=tc " wrap text and comments using textwidth
@@ -359,7 +334,6 @@ set diffopt+=iwhite " No whitespace in vimdiff
 set diffopt+=algorithm:patience
 set diffopt+=indent-heuristic
 set colorcolumn=80 " and give me a colored column
-set showcmd " Show (partial) command in status line.
 set mouse=a " Enable mouse usage (all modes) in terminals
 set shortmess+=c " don't give |ins-completion-menu| messages.
 
@@ -371,7 +345,8 @@ set listchars=nbsp:¬,extends:»,precedes:«,trail:•
 " # Keyboard shortcuts
 " =============================================================================
 " ; as :
-nnoremap ; :
+" this breaks sneak jump forward so no
+" nnoremap ; :
 
 " Ctrl+j and Ctrl+k as Esc
 " Ctrl-j is a little awkward unfortunately:
@@ -415,6 +390,11 @@ map L $
 " ,c will copy entire buffer into clipboard
 noremap <leader>p :read !xsel --clipboard --output<cr>
 noremap <leader>c :w !xsel -ib<cr><cr>
+
+if executable('rg')
+	set grepprg=rg\ --no-heading\ --vimgrep
+	set grepformat=%f:%l:%c:%m
+endif
 
 " <leader>s for Rg search
 noremap <leader>s :Rg
@@ -483,17 +463,8 @@ au BufRead *.pacnew set readonly
 au InsertLeave * set nopaste
 
 " Jump to last edit position on opening file
-if has("autocmd")
-  " https://stackoverflow.com/questions/31449496/vim-ignore-specifc-file-in-autocommand
-  au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
-
-" Help filetype detection
-au BufRead *.plot set filetype=gnuplot
-au BufRead *.md set filetype=markdown
-au BufRead *.lds set filetype=ld
-au BufRead *.tex set filetype=tex
-au BufRead *.trm set filetype=c
+" ignore git commits: https://stackoverflow.com/questions/31449496/vim-ignore-specifc-file-in-autocommand
+au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " Script plugins
 au Filetype html,xml,xsl,php source ~/.config/nvim/scripts/closetag.vim
@@ -506,7 +477,7 @@ function! <SID>StripTrailingWhitespaces()
   endif
 endfun
 
-" Trim spaces at the end: https://stackoverflow.com/a/1618401
+" Trim spaces at the end of lines: https://stackoverflow.com/a/1618401
 au BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
   \ :call <SID>StripTrailingWhitespaces()
 
