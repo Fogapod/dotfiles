@@ -7,11 +7,15 @@ alias o=xdg-open
 
 alias l=exa
 alias ls=exa
-alias ll='exa -l'
-alias la='exa -la'
+alias ll="exa -l"
+alias la="exa -la"
+
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -vI"
 
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
-alias nvimrc='nvim ~/.config/nvim/'
+alias nvimrc="nvim ~/.config/nvim/"
 
 # dotfiles management
 alias gdot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
