@@ -102,7 +102,6 @@ cmp.setup({
   sources = cmp.config.sources({
     -- TODO: currently snippets from lsp end up getting prioritized -- stop that!
     { name = 'nvim_lsp' },
-  }, {
     { name = 'path' },
   }),
   experimental = {
@@ -163,13 +162,16 @@ lspconfig.rust_analyzer.setup {
   },
   settings = {
     ["rust-analyzer"] = {
+	  checkOnSave = {
+		command = "clippy",
+	  },
       cargo = {
         allFeatures = true,
       },
       completion = {
-	postfix = {
-	  enable = false,
-	},
+		postfix = {
+		  enable = false,
+		},
       },
     },
   },
