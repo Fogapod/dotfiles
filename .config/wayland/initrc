@@ -1,0 +1,22 @@
+#!/usr/bin/zsh
+
+export XDG_SESSION_TYPE=wayland
+export QT_QPA_PLATFORM=wayland-egl
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
+export ECORE_EVAS_ENGINE=wayland_egl
+export ELM_ENGINE=wayland_egl
+
+export SDL_VIDEODRIVER=wayland
+
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# polybar forgets fonts
+fc-cache -f &
+
+#xwallpaper --zoom ~/.local/share/wallpapers/venture2.png
+#xrdb ~/.config/X11/Xresources &
+#xcompmgr &                      # transparency
+dunst &                          # notifications
+
+ssh-agent sway
