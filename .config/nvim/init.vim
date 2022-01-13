@@ -187,10 +187,12 @@ lspconfig.pylsp.setup {
   settings = {
     pylsp = {
       configurationSources = {"flake8"},
+	  -- isort, black and mypy are enabled by installing python packages,
+	  -- see requirements.txt
       plugins = {
-	flake8 = {
-	  enabled = true
-	}
+	    flake8 = {
+	      enabled = true
+	    }
       }
     }
   },
@@ -347,7 +349,7 @@ set listchars=nbsp:¬,extends:»,precedes:«,trail:•
 " # Keyboard shortcuts
 " =============================================================================
 " ; as :
-" this breaks sneak jump forward so no
+" this replaces jump forward, so no
 " nnoremap ; :
 
 " Ctrl+j and Ctrl+k as Esc
@@ -410,7 +412,12 @@ command! -bang -nargs=* Rg
 
 function! s:list_cmd()
   let base = fnamemodify(expand('%'), ':h:.:S')
-  return base == '.' ? 'fd --type file --follow' : printf('fd --type file --follow | proximity-sort %s', shellescape(expand('%')))
+  " we are in file in the same directory
+  if base == '.'
+	  return 'fd --type file --follow'
+  else
+	  return printf('fd --type file --follow | proximity-sort %s', shellescape(expand('%')))
+  endif
 endfunction
 
 command! -bang -nargs=? -complete=dir Files
@@ -432,10 +439,6 @@ inoremap <right> <nop>
 " Left and right can switch buffers
 nnoremap <left> :bp<CR>
 nnoremap <right> :bn<CR>
-
-" Move by line
-nnoremap j gj
-nnoremap k gk
 
 " <leader><leader> toggles between buffers
 nnoremap <leader><leader> <c-^>
