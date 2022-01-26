@@ -22,6 +22,7 @@
 
 window:
   # Window dimensions (changes require restart)
+  opacity: 0.95
   #
   # Specified in number of columns/lines, not pixels.
   # If both are `0`, this setting is ignored.
@@ -303,12 +304,6 @@ bell:
   command:
     program: notify-send
     args: ["BEEP"]
-
-# Background opacity
-#
-# Window opacity as a floating point number from `0.0` to `1.0`.
-# The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.95
 
 #selection:
   # This string contains all characters that are used as separators for "semantic words" in Alacritty.
