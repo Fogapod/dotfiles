@@ -69,7 +69,7 @@ endif
 set background=dark
 let base16colorspace=256
 let g:base16_shell_path="~/chk/base16/shell/scripts/"
-colorscheme base16-gruvbox-dark-hard
+colorscheme base16-atelier-plateau-light
 syntax on
 hi Normal ctermbg=NONE
 

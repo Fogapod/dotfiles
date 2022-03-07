@@ -20,7 +20,7 @@ magenta = ${xrdb:color13:#d3869b}
 cyan = ${xrdb:color14:#8ec07c}
 white = ${xrdb:color15:#ebdbb2}
 
-accent = ${colors.yellow}
+accent = #f56290
 warn = ${colors.red}
 value = #0a81f5
 
@@ -109,7 +109,7 @@ interval = 60
 mount-0 = /
 mount-1 = /home
 
-label-mounted = %{F#fba922}%mountpoint%%{F-} %percentage_used%%
+label-mounted = %{F#f56290}%mountpoint%%{F-} %percentage_used%%
 
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.warn}

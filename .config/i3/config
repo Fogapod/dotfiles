@@ -7,10 +7,10 @@
 
 # colors (fat yellow borders)
 # class                 border  backgr. text    indicator child_border
-client.focused          #fba922 #fba922 #ffffff #fba922   #fba922
+client.focused          #f56290 #f56290 #ffffff #f56290   #f56290
 
 # i3-gaps
-for_window [class=".*"] border pixel 1
+for_window [class=".*"] border pixel 2
 gaps inner 0
 gaps outer 0
 
