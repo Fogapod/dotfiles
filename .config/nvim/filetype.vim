@@ -17,7 +17,7 @@ augroup filetypedetect
   au Filetype text let b:coc_enabled = 0
   au Filetype markdown let b:coc_enabled = 0
   " Python
-  au Filetype python setlocal colorcolumn=88
+  au Filetype python setlocal colorcolumn=121
   " Rust
   au Filetype rust setlocal colorcolumn=100
 augroup END
