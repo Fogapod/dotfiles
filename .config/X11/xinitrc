@@ -2,7 +2,7 @@
 
 $XDG_CONFIG_HOME/X11/xprofile
 
-gpgconf --launch gpg-agent
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+eval $(gnome-keyring-daemon --start)
+export SSH_AUTH_SOCK
 
-ssh-agent i3
+dbus-launch --exit-with-session ssh-agent i3

@@ -165,9 +165,11 @@ exec --no-startup-id ~/.config/i3/autostart.sh
 
 # custom app settings
 # xprop - for getting app name/class
+assign [class="Skype"] $ws2
+assign [class="Element"] $ws2
+
 assign [class="VSCodium"] $ws3
 
-assign [class="Slack"] $ws4
 assign [class="discord"] $ws4
 assign [class="Thunderbird"] $ws4
 
