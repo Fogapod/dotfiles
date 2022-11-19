@@ -11,7 +11,7 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # default apps
 export EDITOR="nvim"
 export TERMINAL="alacritty"
-export BROWSER="brave"
+export BROWSER="firefox-developer-edition"
 export FILE="ranger"
 export STATUSBAR="polybar"
 

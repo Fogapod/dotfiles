@@ -21,6 +21,6 @@ alias nvimrc="nvim ~/.config/nvim/"
 alias ssh='TERM=xterm ssh'
 
 # dotfiles management
-alias gdot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias gdot="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 # to remove repo files:
 # rm LICENSE && gdot update-index --assume-unchanged LICENSE
