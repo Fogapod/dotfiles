@@ -17,6 +17,7 @@ export REDISCLI_RCFILE="$XDG_CONFIG_HOME"/redis/redisclirc
 # self explanetory
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export LESSHISTFILE="-"
+export LESSCHARSET=utf-8
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
 export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
@@ -29,6 +30,8 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export GOPATH="$XDG_DATA_HOME"/go
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 export ELECTRUMDIR="$XDG_DATA_HOME/electrum"
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
 
 # unstable
 export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc"
