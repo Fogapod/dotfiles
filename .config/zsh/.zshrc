@@ -123,6 +123,7 @@ zsh_add_plugin "hlissner/zsh-autopair"
 
 # Key-bindings
 bindkey -s '^o' 'ranger^M'
+bindkey -s '^z' 'fg^M'
 bindkey '^[[P' delete-char
 bindkey "^p" up-line-or-beginning-search
 bindkey "^n" down-line-or-beginning-search
