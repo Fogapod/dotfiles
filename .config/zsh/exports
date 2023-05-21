@@ -23,8 +23,6 @@ export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
-export CARGO_HOME="$XDG_DATA_HOME"/cargo
-export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export K9SCONFIG="$XDG_CONFIG_HOME"/k9s
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export GOPATH="$XDG_DATA_HOME"/go
@@ -41,3 +39,10 @@ export PGSERVICEFILE="$XDG_CONFIG_HOME/pg/pg_service.conf"
 
 # store ipfs on HDD
 export IPFS_PATH=$HOME/HDD1/ipfs
+
+# dev
+export CARGO_INCREMENTAL=1
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export RUSTFLAGS DEFAULT="-C target-cpu=native"
+export RUST_BACKTRACE=1

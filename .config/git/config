@@ -1,0 +1,21 @@
+[user]
+    email = fogaprod@gmail.com
+    name = Eugene
+[core]
+    autocrlf = input
+[pull]
+	ff = only
+[push]
+    autoSetupRemote = 1
+[merge]
+	tool = nvim -d
+[diff]
+	algorithm = patience
+[help]
+	autoCorrect = 1
+[alias]
+	c = commit
+	s = status
+	l = log --oneline
+[url "git@github.com:"]
+	insteadOf = gh:
