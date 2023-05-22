@@ -25,8 +25,6 @@ export PATH="$PATH:$GOPATH"/bin
 
 # start X
 # uncomment for sway
-#if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-#  $XDG_CONFIG_HOME/wayland/initrc
-#fi
+# [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ] && $XDG_CONFIG_HOME/wayland/initrc
 
 [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x Xorg >/dev/null && exec startx "$XDG_CONFIG_HOME/X11/xinitrc"
