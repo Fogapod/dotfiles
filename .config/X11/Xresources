@@ -1,8 +1,8 @@
-#include "/home/eugene/chk/base16/xresources/xresources/base16-gruvbox-dark-hard-256.Xresources"
+#include "/home/eugene/chk/base16/Xresources-themes/base16-gruvbox-dark-hard-256.Xresources"
 
 *.font: Monospace-11;
 *faceName: Public Sans
-xterm*faceSize: 14
+xterm*faceSize: 12
 *multiClickTime: 300
 *international: true
 Xcursor.theme: default
