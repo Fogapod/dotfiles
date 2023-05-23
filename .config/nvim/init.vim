@@ -486,4 +486,4 @@ endfun
 au BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
   \ :call <SID>StripTrailingWhitespaces()
 
-au BufWritePre *.py :lua vim.lsp.buf.formatting()
+au BufWritePre *.py :lua vim.lsp.buf.format()
